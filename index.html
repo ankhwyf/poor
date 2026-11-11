@@ -353,13 +353,13 @@ xychart-beta
 
 ---
 
-想按原文顺序读，直接进 [全文](books/穷人.md)。十多万字，两三个晚上可以读完。
+想按原文顺序读，直接进 [全文](https://github.com/ankhwyf/poor/blob/main/books/%E7%A9%B7%E4%BA%BA.md)。十多万字，两三个晚上可以读完。
 </script>
   </section>
 
   <footer>
     <div>底本：人民文学出版社 2021 年版《穷人》，磊然 译，导言 赵桂莲。</div>
-    <div>全文 Markdown：<a href="books/穷人.md">books/穷人.md</a> · 仓库：<a href="https://github.com/ankhwyf/poor">ankhwyf/poor</a></div>
+    <div>全文 Markdown：<a href="https://github.com/ankhwyf/poor/blob/main/books/%E7%A9%B7%E4%BA%BA.md">books/穷人.md</a> · 仓库：<a href="https://github.com/ankhwyf/poor">ankhwyf/poor</a></div>
     <div>本页为个人阅读整理，仅作学习研究之用。</div>
   </footer>
 
@@ -424,6 +424,12 @@ xychart-beta
     chart.textContent = code.textContent;
     box.appendChild(chart);
     code.parentElement.replaceWith(box);
+  });
+
+  // 2.5) 站外链接新窗口打开
+  document.querySelectorAll('a[href^="http"]').forEach(function (a) {
+    a.target = '_blank';
+    a.rel = 'noopener';
   });
 
   // 3) 渲染 Mermaid
