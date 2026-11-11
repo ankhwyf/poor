@@ -2,7 +2,9 @@
 
 > Бедные люди · Poor Folk
 
-**[→ 拆书网页：一页看懂人物、情节与主题](index.html)**
+**[→ 一页速览版](index.html)**（人物 / 情节 / 主题 / 金句，4 张图）
+
+**[→ 深读版](deep.html)**（逐月拆解 + 人物表 + 关键词卡片 + 延伸，10 节）
 
 | | |
 |---|---|
@@ -24,7 +26,9 @@
 
 | 文件 | 说明 |
 |---|---|
-| [`index.html`](index.html) | 拆书网页（HTML + Markdown + Mermaid，单文件，双击即可打开） |
+| [`index.html`](index.html) | 一页速览版（HTML + Markdown + Mermaid） |
+| [`deep.html`](deep.html) | 深读版（逐月拆解，依赖 `assets/` 里的本地渲染库，可离线打开） |
+| [`assets/`](assets) | 本地化的 marked + mermaid，保证离线可用 |
 | [`books/穷人.md`](books/穷人.md) | 全书正文（由 PDF 经 MinerU 转写为 Markdown，插图保留为远程链接） |
 
 ## 关于本仓库
