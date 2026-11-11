@@ -511,99 +511,147 @@ mindmap
 </script>
 
 <!-- ======================= 渲染逻辑 ======================= -->
-<script src="assets/marked.min.js"></script>
-<script src="assets/mermaid.min.js"></script>
 <script>
+/* 依赖加载：本地 assets 优先 → CDN → 全失败就把 Markdown 原样显示 */
 (function () {
+  var SRC = {
+    marked: [
+      'assets/marked.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js',
+      'https://registry.npmmirror.com/marked/12.0.2/files/marked.min.js',
+      'https://unpkg.com/marked@12.0.2/marked.min.js'
+    ],
+    mermaid: [
+      'assets/mermaid.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.min.js',
+      'https://registry.npmmirror.com/mermaid/11.4.0/files/dist/mermaid.min.js',
+      'https://unpkg.com/mermaid@11.4.0/dist/mermaid.min.js'
+    ]
+  };
+
+  function load(list) {
+    return new Promise(function (resolve, reject) {
+      var i = 0;
+      (function next() {
+        if (i >= list.length) return reject(new Error('全部加载失败: ' + list[0]));
+        var s = document.createElement('script');
+        s.src = list[i++];
+        s.onload = resolve;
+        s.onerror = next;
+        document.head.appendChild(s);
+      })();
+    });
+  }
+
   var doc = document.getElementById('doc');
   var md = document.getElementById('md').textContent;
 
-  // 1) Markdown → HTML
-  doc.innerHTML = marked.parse(md);
+  /* ---------- 正文排版 ---------- */
+  function renderText() {
+    doc.innerHTML = marked.parse(md);
 
-  // 2) 自动生成目录（取 h2）
-  var toc = document.getElementById('toc');
-  doc.querySelectorAll('h2').forEach(function (h, i) {
-    if (!h.id) h.id = 'sec-' + (i + 1);
-    var li = document.createElement('li');
-    var a = document.createElement('a');
-    a.href = '#' + h.id;
-    a.textContent = h.textContent.trim().replace(/^[一二三四五六七八九十]+、\s*/, '');
-    li.appendChild(a);
-    toc.appendChild(li);
-  });
+    // 目录
+    var toc = document.getElementById('toc');
+    doc.querySelectorAll('h2').forEach(function (h, i) {
+      if (!h.id) h.id = 'sec-' + (i + 1);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent.trim().replace(/^[一二三四五六七八九十]+、\s*/, '');
+      li.appendChild(a);
+      toc.appendChild(li);
+    });
 
-  // 3) 代码块里的 mermaid → 图表容器
-  doc.querySelectorAll('pre > code.language-mermaid').forEach(function (code) {
-    var box = document.createElement('div');
-    box.className = 'diagram';
-    var chart = document.createElement('div');
-    chart.className = 'mermaid';
-    chart.textContent = code.textContent;
-    box.appendChild(chart);
-    code.parentElement.replaceWith(box);
-  });
+    // 代码块里的 mermaid → 图表容器（即使没有 mermaid，也会显示成代码块）
+    doc.querySelectorAll('pre > code.language-mermaid').forEach(function (code) {
+      var box = document.createElement('div');
+      box.className = 'diagram';
+      var chart = document.createElement('div');
+      chart.className = 'mermaid';
+      chart.textContent = code.textContent;
+      box.appendChild(chart);
+      code.parentElement.replaceWith(box);
+    });
 
-  // 4) 表格包一层，窄屏可横向滚动
-  doc.querySelectorAll('table').forEach(function (t) {
-    var w = document.createElement('div');
-    w.className = 'tbl';
-    t.parentNode.insertBefore(w, t);
-    w.appendChild(t);
-  });
+    // 表格窄屏可滚动
+    doc.querySelectorAll('table').forEach(function (t) {
+      var w = document.createElement('div');
+      w.className = 'tbl';
+      t.parentNode.insertBefore(w, t);
+      w.appendChild(t);
+    });
 
-  // 5) 站外链接新窗口打开
-  doc.querySelectorAll('a[href^="http"]').forEach(function (a) {
-    a.target = '_blank';
-    a.rel = 'noopener';
-  });
+    // 站外链接新窗口
+    doc.querySelectorAll('a[href^="http"]').forEach(function (a) {
+      a.target = '_blank';
+      a.rel = 'noopener';
+    });
+  }
 
-  // 6) 渲染 Mermaid
-  mermaid.initialize({
-    startOnLoad: false,
-    securityLevel: 'loose',
-    theme: 'base',
-    fontFamily: '-apple-system, "PingFang SC", "Songti SC", sans-serif',
-    themeCSS: `
-      .section-root circle.node-bkg { fill: #8c3a2e !important; }
-      .section-root text, .section-root tspan { fill: #fffdf9 !important; }
-      .mindmap-node line { stroke: #e2d9ca !important; }
-    `,
-    themeVariables: {
-      primaryColor: '#fffefb',
-      primaryTextColor: '#211e1a',
-      primaryBorderColor: '#cfc3b1',
-      lineColor: '#b3a898',
-      edgeLabelBackground: '#fbf9f4',
-      secondaryColor: '#f5e9e4',
-      tertiaryColor: '#f7f2e9',
-      fontSize: '14px',
-      cScale0: '#8c3a2e', cScaleLabel0: '#fffdf9',
-      cScale1: '#c58e7d', cScaleLabel1: '#fffdf9',
-      cScale2: '#e6d8cb', cScaleLabel2: '#211e1a',
-      cScale3: '#f2eade', cScaleLabel3: '#211e1a',
-      cScale4: '#f7f2e8', cScaleLabel4: '#211e1a',
-      cScale5: '#f7f2e8', cScaleLabel5: '#211e1a',
-      cScale6: '#f7f2e8', cScaleLabel6: '#211e1a',
-      cScale7: '#f7f2e8', cScaleLabel7: '#211e1a',
-      cScale8: '#f7f2e8', cScaleLabel8: '#211e1a',
-      cScale9: '#f7f2e8', cScaleLabel9: '#211e1a',
-      cScale10: '#f7f2e8', cScaleLabel10: '#211e1a',
-      cScale11: '#f7f2e8', cScaleLabel11: '#211e1a',
-      xyChart: {
-        backgroundColor: '#fffefb',
-        titleColor: '#4a443c',
-        xAxisLabelColor: '#6b645c', xAxisLineColor: '#cfc3b1', xAxisTickColor: '#cfc3b1',
-        yAxisLabelColor: '#6b645c', yAxisLineColor: '#cfc3b1', yAxisTickColor: '#cfc3b1',
-        plotColorPalette: '#8c3a2e'
-      }
-    },
-    flowchart: { curve: 'linear', htmlLabels: true, padding: 14, nodeSpacing: 38, rankSpacing: 50 },
-    mindmap: { padding: 12 }
-  });
-  mermaid.run({ querySelector: '.mermaid' }).catch(function (e) { console.error(e); });
+  /* ---------- 兜底：直接把 Markdown 显示出来 ---------- */
+  function showRaw() {
+    var note = document.createElement('div');
+    note.className = 'note';
+    note.textContent = '没找到渲染库（assets/ 或网络），下面先按原始 Markdown 显示。把 deep.html 和 assets/ 文件夹放在同一目录，或用联网环境打开，即可正常排版。';
+    var pre = document.createElement('pre');
+    pre.style.cssText = 'white-space:pre-wrap;word-break:break-word;font-size:13px;line-height:1.8;color:#4a443c;background:#fffefb;border:1px solid #e6dfd3;border-radius:10px;padding:18px;';
+    pre.textContent = md;
+    doc.innerHTML = '';
+    doc.appendChild(note);
+    doc.appendChild(pre);
+    var nav = document.querySelector('nav.toc');
+    if (nav) nav.style.display = 'none';
+  }
 
-  // 7) 回到顶部
+  /* ---------- 图表 ---------- */
+  function renderCharts() {
+    if (!window.mermaid) return;
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'loose',
+      theme: 'base',
+      fontFamily: '-apple-system, "PingFang SC", "Songti SC", sans-serif',
+      themeCSS: `
+        .section-root circle.node-bkg { fill: #8c3a2e !important; }
+        .section-root text, .section-root tspan { fill: #fffdf9 !important; }
+        .mindmap-node line { stroke: #e2d9ca !important; }
+      `,
+      themeVariables: {
+        primaryColor: '#fffefb',
+        primaryTextColor: '#211e1a',
+        primaryBorderColor: '#cfc3b1',
+        lineColor: '#b3a898',
+        edgeLabelBackground: '#fbf9f4',
+        secondaryColor: '#f5e9e4',
+        tertiaryColor: '#f7f2e9',
+        fontSize: '14px',
+        cScale0: '#8c3a2e', cScaleLabel0: '#fffdf9',
+        cScale1: '#c58e7d', cScaleLabel1: '#fffdf9',
+        cScale2: '#e6d8cb', cScaleLabel2: '#211e1a',
+        cScale3: '#f2eade', cScaleLabel3: '#211e1a',
+        cScale4: '#f7f2e8', cScaleLabel4: '#211e1a',
+        cScale5: '#f7f2e8', cScaleLabel5: '#211e1a',
+        cScale6: '#f7f2e8', cScaleLabel6: '#211e1a',
+        cScale7: '#f7f2e8', cScaleLabel7: '#211e1a',
+        cScale8: '#f7f2e8', cScaleLabel8: '#211e1a',
+        cScale9: '#f7f2e8', cScaleLabel9: '#211e1a',
+        cScale10: '#f7f2e8', cScaleLabel10: '#211e1a',
+        cScale11: '#f7f2e8', cScaleLabel11: '#211e1a',
+        xyChart: {
+          backgroundColor: '#fffefb',
+          titleColor: '#4a443c',
+          xAxisLabelColor: '#6b645c', xAxisLineColor: '#cfc3b1', xAxisTickColor: '#cfc3b1',
+          yAxisLabelColor: '#6b645c', yAxisLineColor: '#cfc3b1', yAxisTickColor: '#cfc3b1',
+          plotColorPalette: '#8c3a2e'
+        }
+      },
+      flowchart: { curve: 'linear', htmlLabels: true, padding: 14, nodeSpacing: 38, rankSpacing: 50 },
+      mindmap: { padding: 12 }
+    });
+    mermaid.run({ querySelector: '.mermaid' }).catch(function (e) { console.error(e); });
+  }
+
+  /* ---------- 回到顶部 ---------- */
   var top = document.getElementById('top');
   window.addEventListener('scroll', function () {
     top.classList.toggle('on', window.scrollY > 600);
@@ -611,6 +659,14 @@ mindmap
   top.addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+
+  /* ---------- 启动：先排版，再画图（图失败不影响正文） ---------- */
+  load(SRC.marked)
+    .then(renderText)
+    .catch(showRaw)
+    .then(function () { return load(SRC.mermaid); })
+    .then(renderCharts)
+    .catch(function (e) { console.warn('mermaid 未加载，图表以代码块显示', e); });
 })();
 </script>
 </body>
