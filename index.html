@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>穷人 · 拆书 | 陀思妥耶夫斯基</title>
+<meta name="description" content="《穷人》陀思妥耶夫斯基著，磊然译。一页看懂人物、情节、主题与读法。">
+<style>
+  :root{
+    --paper:#fbf9f4;
+    --ink:#1f1c18;
+    --ink-soft:#4a443c;
+    --muted:#8a8175;
+    --line:#e3ddd1;
+    --accent:#8c3a2e;
+    --accent-soft:#f3e7e2;
+    --card:#fffdf9;
+    --shadow:0 1px 2px rgba(31,28,24,.05), 0 8px 24px rgba(31,28,24,.05);
+    --serif:"Songti SC","Noto Serif SC","Source Han Serif SC",Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth; scroll-padding-top:64px}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--serif); font-size:17px; line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(circle at 12% 8%, #fff 0%, transparent 45%);
+  }
+
+  /* ---------- 顶部导航 ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(251,249,244,.88);
+    backdrop-filter:saturate(180%) blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .inner{
+    max-width:860px; margin:0 auto; padding:0 22px;
+    display:flex; align-items:center; gap:18px; height:56px;
+    font-family:var(--sans); font-size:13.5px;
+  }
+  nav .brand{font-weight:600; letter-spacing:.06em; color:var(--accent); margin-right:auto; white-space:nowrap}
+  nav a{color:var(--ink-soft); text-decoration:none; white-space:nowrap}
+  nav a:hover{color:var(--accent)}
+  nav .links{display:flex; gap:16px; overflow-x:auto; scrollbar-width:none}
+  nav .links::-webkit-scrollbar{display:none}
+
+  /* ---------- 版心 ---------- */
+  main{max-width:860px; margin:0 auto; padding:0 22px 96px}
+  section{margin-top:72px; scroll-margin-top:72px}
+  .eyebrow{
+    font-family:var(--sans); font-size:12px; letter-spacing:.22em;
+    color:var(--muted); text-transform:uppercase; margin-bottom:6px;
+  }
+  h2{
+    font-size:26px; font-weight:600; letter-spacing:.02em;
+    margin:0 0 22px; padding-bottom:12px; border-bottom:1px solid var(--line);
+  }
+  h2 .num{color:var(--accent); font-family:var(--sans); font-size:14px; margin-right:10px; vertical-align:2px}
+
+  /* ---------- 封面 ---------- */
+  header.hero{padding:76px 0 12px; text-align:center}
+  .hero .ru{font-family:var(--sans); font-size:13px; letter-spacing:.34em; color:var(--muted); text-transform:uppercase}
+  .hero h1{
+    font-size:clamp(46px,10vw,76px); line-height:1.1; margin:16px 0 10px;
+    letter-spacing:.16em; font-weight:600;
+  }
+  .hero .byline{font-family:var(--sans); font-size:14px; color:var(--ink-soft); letter-spacing:.06em}
+  .hero .byline span{color:var(--muted); margin:0 8px}
+  .rule{width:56px; height:1px; background:var(--accent); margin:30px auto 0; opacity:.5}
+
+  /* ---------- 一句话 ---------- */
+  .lead{
+    margin-top:44px; padding:30px 32px; background:var(--card);
+    border:1px solid var(--line); border-left:3px solid var(--accent);
+    border-radius:4px; box-shadow:var(--shadow);
+  }
+  .lead p{margin:0; font-size:19px; line-height:1.95; color:var(--ink)}
+
+  /* ---------- 数字卡 ---------- */
+  .stats{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:14px; margin-top:24px;
+  }
+  .stat{
+    background:var(--card); border:1px solid var(--line); border-radius:4px;
+    padding:20px 16px; text-align:center;
+  }
+  .stat .n{font-size:30px; line-height:1.2; color:var(--accent); font-weight:600}
+  .stat .k{font-family:var(--sans); font-size:12.5px; color:var(--muted); margin-top:6px; letter-spacing:.04em}
+  .stats + .md{margin-top:30px}
+
+  /* ---------- Markdown 正文 ---------- */
+  .md p{margin:0 0 18px}
+  .md ul,.md ol{padding-left:1.4em; margin:0 0 18px}
+  .md li{margin:.35em 0}
+  .md strong{font-weight:600; color:var(--ink)}
+  .md em{font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%)}
+  .md a{color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(140,58,46,.3)}
+  .md blockquote{
+    margin:22px 0; padding:18px 24px; background:var(--card);
+    border-left:3px solid var(--line); color:var(--ink-soft); font-size:16.5px;
+  }
+  .md blockquote p{margin:0 0 8px}
+  .md blockquote p:last-child{margin:0}
+  .md blockquote cite{
+    display:block; margin-top:10px; font-family:var(--sans);
+    font-size:12.5px; font-style:normal; color:var(--muted);
+  }
+  .md table{width:100%; border-collapse:collapse; margin:22px 0; font-size:15.5px; font-family:var(--sans)}
+  .md th,.md td{padding:11px 12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top}
+  .md th{font-weight:600; color:var(--muted); font-size:12.5px; letter-spacing:.1em; white-space:nowrap}
+  .md td:nth-child(2){white-space:nowrap}
+  .md hr{border:0; border-top:1px solid var(--line); margin:36px 0}
+  .md h3{font-size:18px; margin:32px 0 10px; font-weight:600}
+
+  /* ---------- Mermaid 容器 ---------- */
+  .diagram{
+    background:var(--card); border:1px solid var(--line); border-radius:4px;
+    padding:26px 16px; margin:26px 0; overflow-x:auto;
+  }
+  .diagram svg{display:block; margin:0 auto; max-width:100%; height:auto}
+  .cap{
+    font-family:var(--sans); font-size:12.5px; color:var(--muted);
+    text-align:center; margin-top:-8px; margin-bottom:8px; letter-spacing:.03em;
+  }
+
+  /* ---------- 页脚 ---------- */
+  footer{
+    margin-top:88px; padding-top:26px; border-top:1px solid var(--line);
+    font-family:var(--sans); font-size:13px; color:var(--muted); line-height:1.9;
+  }
+  footer a{color:var(--ink-soft); text-decoration:none; border-bottom:1px dotted var(--muted)}
+  footer a:hover{color:var(--accent)}
+
+  @media (max-width:640px){
+    body{font-size:16.5px}
+    header.hero{padding:48px 0 8px}
+    section{margin-top:56px}
+    .lead{padding:22px}
+    nav .brand{display:none}
+  }
+  @media print{
+    nav{display:none}
+    body{background:#fff}
+    .diagram{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <span class="brand">穷人 · 拆书</span>
+    <div class="links">
+      <a href="#overview">概览</a>
+      <a href="#people">人物</a>
+      <a href="#plot">情节</a>
+      <a href="#themes">主题</a>
+      <a href="#quotes">金句</a>
+      <a href="#howto">读法</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <header class="hero">
+    <div class="ru">Бедные люди · 1846</div>
+    <h1>穷人</h1>
+    <div class="byline">陀思妥耶夫斯基 著<span>·</span>磊然 译</div>
+    <div class="rule"></div>
+  </header>
+
+  <!-- ========== 01 概览 ========== -->
+  <section id="overview">
+    <div class="eyebrow">Overview</div>
+    <h2><span class="num">01</span>一分钟读懂</h2>
+
+    <div class="lead">
+      <p>两个穷人隔着一个院子写了一年信，把彼此活成了活下去的理由。秋天，她被一个有钱人带走，信就断了。</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="n">55</div><div class="k">封书信</div></div>
+      <div class="stat"><div class="n">31<span style="font-size:16px"> + </span>24</div><div class="k">男方 / 女方</div></div>
+      <div class="stat"><div class="n">1846</div><div class="k">处女作发表</div></div>
+      <div class="stat"><div class="n">9<span style="font-size:16px"> 级</span></div><div class="k">文官品级</div></div>
+    </div>
+
+<script type="text/markdown">
+这是陀思妥耶夫斯基二十四岁写下的**第一部小说**，1846 年发表在涅克拉索夫编的《彼得堡文集》里。涅克拉索夫读完，半夜跑去敲作者的门，喊出那句著名的「**新的果戈理出现了！**」
+
+全书没有一句旁白，只有 **55 封信**——男主人公 31 封，女主人公 24 封。读者像趴在墙缝上偷看两个人的人生。
+
+它写的不是「穷」，而是穷里那点**不肯塌掉的体面**。
+</script>
+  </section>
+
+  <!-- ========== 02 人物 ========== -->
+  <section id="people">
+    <div class="eyebrow">Characters</div>
+    <h2><span class="num">02</span>谁在写信</h2>
+
+<script type="text/markdown">
+**马卡尔·阿历克谢耶维奇·杰武什金**：九级文官，抄了三十年公文。为了省钱给瓦连卡租好房子，自己搬到厨房隔出来的小屋里——隔板后面一张床、一张桌、两把椅子。他爱用指小词：「小天使」「小宝贝」「我的心肝」。
+
+**瓦尔瓦拉·阿历克谢耶芙娜·多布罗谢洛娃**（瓦连卡）：孤女，寄住在同一院子的另一头。她的信更短、更克制，也更像在替对方省力气。
+
+他们之间有个不用写字的暗号：**窗帘卷起来，就是「早上好」；放下去，就是「该睡了」**。
+
+```mermaid
+flowchart LR
+  M["杰武什金<br/>九级文官 · 抄写员"]
+  V["瓦尔瓦拉<br/>瓦连卡"]
+  B["贝科夫先生<br/>地主"]
+  A["安娜·费奥多罗芙娜<br/>远亲"]
+  S["将军<br/>上司"]
+
+  M <-->|"书信 55 封"| V
+  A -->|"收留过她"| V
+  B ==>|"最终娶走她"| V
+  S -.->|"当众施舍 100 卢布"| M
+```
+</script>
+    <div class="cap">粗线＝决定命运的那条线　虚线＝人情往来</div>
+
+<script type="text/markdown">
+其余出场的人，一句话记：
+
+| 人物 | 一句话 |
+|---|---|
+| 费奥多拉 | 和瓦连卡同住的女仆，替她跑腿、劝她认命。 |
+| 捷列扎 | 杰武什金那边的女仆，两人的信靠她传递。 |
+| 波克罗夫斯基 | 大学生，瓦连卡的初恋，死于肺病——她第一次知道什么叫失去。 |
+| 戈尔什科夫一家 | 更穷的邻居，孩子病死，是杰武什金眼里的「明天的自己」。 |
+| 拉塔贾耶夫 | 穷文人，靠写廉价小说糊口，请杰武什金喝茶、谈文学。 |
+</script>
+  </section>
+
+  <!-- ========== 03 情节 ========== -->
+  <section id="plot">
+    <div class="eyebrow">Plot</div>
+    <h2><span class="num">03</span>从春到秋</h2>
+
+<script type="text/markdown">
+整本书的时间就是**一个春天到秋天**。没有反转，没有救赎，只有慢慢收紧的日子。
+
+```mermaid
+flowchart LR
+  A["第一幕 · 四月<br/>窗帘、凤仙花、客气的试探"] --> B["第二幕 · 五—六月<br/>茶、靴子、借来的钱"]
+  B --> C["第三幕 · 七—八月<br/>别人的不幸，与当众的羞耻"]
+  C --> D["第四幕 · 九月<br/>贝科夫出现 · 婚事 · 告别"]
+  D --> E["最后一封信<br/>没有回音"]
+```
+</script>
+
+<script type="text/markdown">
+| 幕 | 时间 | 发生了什么 |
+|---|---|---|
+| 一 | 四月 | 两人刚通信，互相试探、道歉、谦让。窗帘成了暗号，凤仙花成了话题。 |
+| 二 | 五—六月 | 穷的具体形状：为了给瓦连卡买茶和衣物，杰武什金四处借钱、典当，连靴子都舍不得买。 |
+| 三 | 七—八月 | 邻居戈尔什科夫一家病死孩子；杰武什金在将军面前掉了纽扣，狼狈不堪；瓦连卡讲述初恋波克罗夫斯基之死。 |
+| 四 | 九月 | 地主贝科夫出现，要娶瓦连卡去草原。她答应了。最后几封信一封比一封短。 |
+</script>
+  </section>
+
+  <!-- ========== 04 主题 ========== -->
+  <section id="themes">
+    <div class="eyebrow">Themes</div>
+    <h2><span class="num">04</span>它到底在写什么</h2>
+
+<script type="text/markdown">
+```mermaid
+mindmap
+  root((穷人))
+    孤独
+      倾诉
+      被需要
+    可怜
+      不是穷
+      是心疼
+    体面
+      一颗纽扣
+      一双靴子
+    小人物
+      彼得堡底层
+      第一次开口
+    书信
+      说不出口的话
+      纸上说得出口
+    城市
+      院子
+      厨房隔断
+```
+</script>
+
+<script type="text/markdown">
+**孤独，不是穷。** 杰武什金愿意放弃好房子、放弃喝茶、放弃买靴子——因为「被需要」是他存在的证据。瓦连卡一走，他的心就成了「深不见底的大洞」。
+
+**体面，是一颗纽扣。** 全书最狠的一场戏不是挨饿，是他站在将军面前，制服上那颗摇摇欲坠的纽扣。穷可以忍，丢脸不行。
+
+**书信，是穷人唯一的房间。** 面对面说不出口的话，纸上说得出口——而且更自由、更酣畅，甚至更肆无忌惮。写信，是这两个人给自己造的一间屋子。
+</script>
+
+<script type="text/markdown">
+```mermaid
+xychart-beta
+  title "书信里的情绪温度（示意，非精确统计）"
+  x-axis ["四月", "五月", "六月", "七月", "八月", "九月"]
+  y-axis "温度" 0 --> 10
+  line [7.5, 6.2, 5.0, 4.2, 6.5, 1.8]
+```
+</script>
+    <div class="cap">四月的客气 → 盛夏的窘迫 → 八月回光般的互相扶持 → 九月的骤降</div>
+  </section>
+
+  <!-- ========== 05 金句 ========== -->
+  <section id="quotes">
+    <div class="eyebrow">Quotes</div>
+    <h2><span class="num">05</span>几句可以抄下来的话</h2>
+
+<script type="text/markdown">
+> 您放下窗帘——那就表示，再见，马卡尔·阿历克谢耶维奇，该睡觉了！您拉起窗帘——那就表示，早上好，马卡尔·阿历克谢耶维奇，您睡得好吗？
+>
+> <cite>第一封信 · 四月八日</cite>
+
+> 我亲爱的，我没能好好地看清楚您那可爱的小脸，我是感到多么遗憾哪！
+>
+> <cite>第一封信 · 四月八日</cite>
+
+> 现在我的心里堵得满满的，堵满了泪水……泪水憋得我不能透气，撕碎了我的心。再见吧。上帝啊！我是多么忧伤！记住我，记住您可怜的瓦连卡！
+>
+> <cite>瓦尔瓦拉 · 告别信</cite>
+
+> 他们正在把您带走，您要走了！现在他们就是把我的心从我的胸腔里剜出来，也比把您从我这里带走的好！
+>
+> <cite>杰武什金 · 最后一封</cite>
+</script>
+  </section>
+
+  <!-- ========== 06 读法 ========== -->
+  <section id="howto">
+    <div class="eyebrow">How to read</div>
+    <h2><span class="num">06</span>怎么读这本</h2>
+
+<script type="text/markdown">
+1. **先读最后两封，再回到四月。** 知道结局之后，前面每一句客气的「不必挂念我」都会变味——这正是这本书的力量所在。
+2. **盯住三样东西：钱、称呼、天气。** 借了多少、还了多少；从「您」到「你」用了多久；春天到秋天的光怎么一点点暗下去。
+3. **别急着同情。** 陀思妥耶夫斯基写的不是可怜人，是两个**拼命想保住尊严**的人。同情是最容易、也最偷懒的读法。
+4. **读完接着读《双重人格》。** 同一类小官吏，一个还能倾诉，一个连倾诉的对象都没有。
+
+---
+
+想按原文顺序读，直接进 [全文](books/穷人.md)。十多万字，两三个晚上可以读完。
+</script>
+  </section>
+
+  <footer>
+    <div>底本：人民文学出版社 2021 年版《穷人》，磊然 译，导言 赵桂莲。</div>
+    <div>全文 Markdown：<a href="books/穷人.md">books/穷人.md</a> · 仓库：<a href="https://github.com/ankhwyf/poor">ankhwyf/poor</a></div>
+    <div>本页为个人阅读整理，仅作学习研究之用。</div>
+  </footer>
+
+</main>
+
+<script>
+/* 依赖加载：依次尝试多个 CDN，哪个通用哪个 */
+(function () {
+  var SRC = {
+    marked: [
+      'https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js',
+      'https://registry.npmmirror.com/marked/12.0.2/files/marked.min.js',
+      'https://unpkg.com/marked@12.0.2/marked.min.js'
+    ],
+    mermaid: [
+      'https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.min.js',
+      'https://registry.npmmirror.com/mermaid/11.4.0/files/dist/mermaid.min.js',
+      'https://unpkg.com/mermaid@11.4.0/dist/mermaid.min.js'
+    ]
+  };
+
+  function load(list) {
+    return new Promise(function (resolve, reject) {
+      var i = 0;
+      (function next() {
+        if (i >= list.length) return reject(new Error('CDN 全部加载失败: ' + list[0]));
+        var s = document.createElement('script');
+        s.src = list[i++];
+        s.onload = resolve;
+        s.onerror = next;
+        document.head.appendChild(s);
+      })();
+    });
+  }
+
+  Promise.all([load(SRC.marked), load(SRC.mermaid)])
+    .then(boot)
+    .catch(function (err) {
+      console.error(err);
+      document.querySelectorAll('script[type="text/markdown"]').forEach(function (s) {
+        var pre = document.createElement('pre');
+        pre.textContent = s.textContent;
+        s.replaceWith(pre);
+      });
+    });
+
+  function boot() {
+  // 1) 把 <script type="text/markdown"> 里的 Markdown 渲染成 HTML
+  document.querySelectorAll('script[type="text/markdown"]').forEach(function (src) {
+    var host = document.createElement('div');
+    host.className = 'md';
+    host.innerHTML = marked.parse(src.textContent);
+    src.replaceWith(host);
+  });
+
+  // 2) 把 Markdown 里的 ```mermaid 代码块换成图
+  document.querySelectorAll('pre > code.language-mermaid').forEach(function (code) {
+    var box = document.createElement('div');
+    box.className = 'diagram';
+    var chart = document.createElement('div');
+    chart.className = 'mermaid';
+    chart.textContent = code.textContent;
+    box.appendChild(chart);
+    code.parentElement.replaceWith(box);
+  });
+
+  // 3) 渲染 Mermaid
+  if (window.mermaid) {
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'loose',
+      theme: 'base',
+      themeCSS: `
+        .section-root circle.node-bkg { fill: #8c3a2e !important; }
+        .section-root text, .section-root tspan { fill: #fffdf9 !important; }
+        .mindmap-node line { stroke: #e2d9ca !important; }
+      `,
+      fontFamily: '-apple-system, "PingFang SC", "Songti SC", sans-serif',
+      themeVariables: {
+        primaryColor: '#fffdf9',
+        primaryTextColor: '#1f1c18',
+        primaryBorderColor: '#c9c0b0',
+        lineColor: '#b3a898',
+        edgeLabelBackground: '#fbf9f4',
+        secondaryColor: '#f3e7e2',
+        tertiaryColor: '#f6f2ea',
+        fontSize: '14px',
+        cScale0: '#8c3a2e', cScaleLabel0: '#fffdf9',
+        cScale1: '#c58e7d', cScaleLabel1: '#fffdf9',
+        cScale2: '#e6d8cb', cScaleLabel2: '#1f1c18',
+        cScale3: '#f2eade', cScaleLabel3: '#1f1c18',
+        cScale4: '#f7f2e8', cScaleLabel4: '#1f1c18',
+        cScale5: '#f7f2e8', cScaleLabel5: '#1f1c18',
+        cScale6: '#f7f2e8', cScaleLabel6: '#1f1c18',
+        cScale7: '#f7f2e8', cScaleLabel7: '#1f1c18',
+        cScale8: '#f7f2e8', cScaleLabel8: '#1f1c18',
+        cScale9: '#f7f2e8', cScaleLabel9: '#1f1c18',
+        cScale10: '#f7f2e8', cScaleLabel10: '#1f1c18',
+        cScale11: '#f7f2e8', cScaleLabel11: '#1f1c18',
+        xyChart: {
+          backgroundColor: '#fffdf9',
+          titleColor: '#4a443c',
+          xAxisTitleColor: '#6b645c',
+          xAxisLabelColor: '#6b645c',
+          xAxisTickColor: '#c9c0b0',
+          xAxisLineColor: '#c9c0b0',
+          yAxisTitleColor: '#6b645c',
+          yAxisLabelColor: '#6b645c',
+          yAxisTickColor: '#c9c0b0',
+          yAxisLineColor: '#c9c0b0',
+          plotColorPalette: '#8c3a2e'
+        }
+      },
+      flowchart: { curve: 'linear', htmlLabels: true, padding: 14, nodeSpacing: 38, rankSpacing: 50 },
+      mindmap: { padding: 12 }
+    });
+    mermaid.run({ querySelector: '.mermaid' }).catch(function (e) {
+      console.error(e);
+    });
+  }
+  }
+})();
+</script>
+</body>
+</html>
