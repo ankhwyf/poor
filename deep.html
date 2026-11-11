@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>深读｜穷人 · 陀思妥耶夫斯基</title>
+<meta name="description" content="《穷人》逐月拆解：从四月到九月，五十五封信里，一个人是怎么靠写信活下来的。">
+<style>
+  :root{
+    --paper:#fbf9f4;
+    --card:#fffefb;
+    --ink:#211e1a;
+    --ink-2:#4a443c;
+    --muted:#8a8175;
+    --line:#e6dfd3;
+    --accent:#8c3a2e;
+    --accent-soft:#f5e9e4;
+    --green:#3d6b5a;
+    --green-soft:#eef3ef;
+    --shadow:0 1px 2px rgba(60,45,30,.05), 0 8px 24px -12px rgba(60,45,30,.18);
+    --max:880px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth; scroll-padding-top:20px}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",Georgia,serif;
+    font-size:16.5px; line-height:1.9; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    padding:64px 0 40px; border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#f7f2e9 0%,var(--paper) 100%);
+  }
+  .kicker{
+    font-family:-apple-system,"PingFang SC",sans-serif;
+    font-size:.76rem; letter-spacing:.24em; color:var(--accent);
+    text-transform:uppercase; font-weight:700; margin-bottom:16px;
+  }
+  h1.book{
+    font-size:clamp(1.9rem,5.4vw,2.9rem); line-height:1.3; margin:0 0 8px;
+    letter-spacing:.04em; font-weight:600;
+  }
+  .sub{
+    color:var(--muted); font-size:.95rem; letter-spacing:.04em; margin-bottom:24px;
+    font-family:-apple-system,"PingFang SC",sans-serif;
+  }
+  .oneline{
+    background:var(--card); border-left:4px solid var(--accent);
+    padding:18px 22px; border-radius:0 10px 10px 0; box-shadow:var(--shadow);
+    font-size:1.02rem; line-height:1.9; margin:0;
+  }
+  .oneline b{color:var(--accent)}
+  .meta{
+    margin-top:20px; font-size:.82rem; color:var(--muted);
+    display:flex; flex-wrap:wrap; gap:6px 16px;
+    font-family:-apple-system,"PingFang SC",sans-serif;
+  }
+  .meta span::before{content:"／ ";opacity:.35}
+
+  /* ---------- TOC ---------- */
+  nav.toc{
+    margin:32px 0 0; padding:20px 22px; background:var(--card);
+    border:1px solid var(--line); border-radius:12px;
+  }
+  nav.toc h2{
+    font-family:-apple-system,"PingFang SC",sans-serif;
+    font-size:.76rem; letter-spacing:.2em; color:var(--muted);
+    margin:0 0 12px; font-weight:700; text-transform:uppercase;
+  }
+  nav.toc ol{
+    margin:0; padding:0; list-style:none; counter-reset:toc;
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:2px 20px;
+  }
+  nav.toc li{counter-increment:toc; font-size:.92rem}
+  nav.toc a{
+    color:var(--ink-2); text-decoration:none; display:block;
+    padding:4px 0; border-bottom:1px dotted transparent;
+  }
+  nav.toc a::before{
+    content:counter(toc,decimal-leading-zero); color:var(--accent);
+    font-family:ui-monospace,Menlo,monospace; font-size:.74rem; margin-right:9px;
+  }
+  nav.toc a:hover{color:var(--accent); border-bottom-color:var(--accent)}
+
+  /* ---------- 正文 ---------- */
+  main{padding:8px 0 40px}
+  main h2{
+    font-size:clamp(1.3rem,3.2vw,1.55rem); margin:62px 0 10px;
+    padding-top:26px; border-top:1px solid var(--line); letter-spacing:.02em; font-weight:600;
+  }
+  main h2:first-child{border-top:0; padding-top:0; margin-top:34px}
+  main h3{font-size:1.06rem; margin:34px 0 8px; font-weight:600}
+  main h3 .num{
+    color:var(--accent); font-family:ui-monospace,Menlo,monospace;
+    font-size:.86rem; margin-right:8px; font-weight:400;
+  }
+  main p{margin:12px 0; color:var(--ink-2)}
+  main strong{color:var(--ink); background:linear-gradient(transparent 62%,#f7e2d8 62%); padding:0 1px}
+  main ul,main ol{padding-left:1.35em; color:var(--ink-2)}
+  main li{margin:6px 0}
+  main li::marker{color:var(--accent)}
+  main a{color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(140,58,46,.3)}
+  main a:hover{border-bottom-color:var(--accent)}
+  main hr{border:0; border-top:1px solid var(--line); margin:44px 0}
+  main code{
+    font-family:ui-monospace,Menlo,monospace; font-size:.88em;
+    background:#f1ece2; padding:1px 5px; border-radius:3px;
+  }
+
+  blockquote{
+    margin:20px 0; padding:14px 20px; background:var(--green-soft);
+    border-left:4px solid var(--green); border-radius:0 10px 10px 0;
+    color:#2f4a40; font-size:.96rem;
+  }
+  blockquote p{margin:0; color:inherit}
+  blockquote cite{
+    display:block; margin-top:8px; font-size:.8rem; color:var(--green);
+    opacity:.85; font-style:normal; font-family:-apple-system,"PingFang SC",sans-serif;
+  }
+
+  /* 表格 */
+  .tbl{overflow-x:auto; margin:20px 0; -webkit-overflow-scrolling:touch}
+  table{
+    border-collapse:collapse; width:100%; font-size:.9rem; background:var(--card);
+    border-radius:10px; overflow:hidden; box-shadow:var(--shadow); min-width:520px;
+    font-family:-apple-system,"PingFang SC",sans-serif;
+  }
+  th,td{padding:11px 14px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top}
+  thead th{background:#f4eee4; font-weight:700; color:var(--ink); white-space:nowrap; font-size:.86rem}
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr:hover{background:#fdfaf5}
+  td:first-child{font-weight:600; color:var(--accent); white-space:nowrap}
+
+  /* mermaid */
+  .diagram{
+    margin:26px 0; padding:22px 12px; background:var(--card);
+    border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
+    overflow-x:auto; text-align:center;
+  }
+  .diagram svg{max-width:100%; height:auto}
+  .diagram .cap{
+    margin:14px 6px 0; font-size:.8rem; color:var(--muted); text-align:center;
+    font-family:-apple-system,"PingFang SC",sans-serif;
+  }
+
+  /* 卡片 */
+  .cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:14px; margin:22px 0}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:16px 18px; box-shadow:var(--shadow);
+  }
+  .card h4{margin:0 0 6px; font-size:.98rem; color:var(--accent); font-weight:600}
+  .card p{margin:0; font-size:.86rem; line-height:1.8; color:var(--ink-2)}
+
+  /* 问题清单 */
+  .check{list-style:none; padding:0; display:grid; gap:10px}
+  .check li{
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:13px 16px 13px 46px; position:relative; font-size:.94rem; color:var(--ink-2);
+  }
+  .check li::before{
+    content:"?"; position:absolute; left:15px; top:13px; width:20px; height:20px;
+    display:grid; place-items:center; border-radius:50%; background:var(--accent);
+    color:#fff; font-size:.72rem; font-weight:700;
+  }
+
+  .takeaway{
+    margin:20px 0; padding:14px 20px; background:var(--accent-soft);
+    border-left:4px solid var(--accent); border-radius:0 10px 10px 0;
+    color:#6f2b21; font-size:.95rem;
+  }
+  .takeaway p{margin:0; color:inherit}
+
+  .note{
+    background:#fbf6ec; border:1px dashed #ddcfb4; border-radius:10px;
+    padding:14px 18px; font-size:.86rem; color:#7a6544; margin:20px 0;
+    font-family:-apple-system,"PingFang SC",sans-serif;
+  }
+
+  footer{
+    border-top:1px solid var(--line); padding:32px 0 60px;
+    color:var(--muted); font-size:.82rem; line-height:1.9;
+    font-family:-apple-system,"PingFang SC",sans-serif;
+  }
+  footer a{color:var(--ink-2); text-decoration:none; border-bottom:1px dotted var(--muted)}
+  footer a:hover{color:var(--accent)}
+
+  .top{
+    position:fixed; right:20px; bottom:22px; width:42px; height:42px; border-radius:50%;
+    background:var(--accent); color:#fff; border:0; cursor:pointer; font-size:1.1rem;
+    box-shadow:0 6px 18px -6px rgba(140,58,46,.6); opacity:0; pointer-events:none;
+    transition:opacity .25s, transform .25s; transform:translateY(8px);
+  }
+  .top.on{opacity:1; pointer-events:auto; transform:none}
+
+  #loading{color:var(--muted); text-align:center; padding:60px 0; font-size:.9rem}
+
+  @media (max-width:640px){
+    body{font-size:16px}
+    header.hero{padding:44px 0 30px}
+    .diagram{padding:14px 4px}
+    table{min-width:480px}
+  }
+  @media print{
+    body{background:#fff}
+    nav.toc,.top,#loading{display:none}
+    .diagram,blockquote,table{box-shadow:none; break-inside:avoid}
+    main h2{break-after:avoid}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">深读 · Close Reading</div>
+    <h1 class="book">穷人</h1>
+    <div class="sub">Бедные люди ／ ［俄］陀思妥耶夫斯基 著　磊然 译　人民文学出版社 2021</div>
+    <p class="oneline">
+      这本书只干一件事：让两个穷人<b>隔着院子写六个月的信用</b>。
+      它想说的不是「他们没钱」，而是——<b>当一个人连说话的地方都没有了，一封信就是他能拥有的全部房间。</b>
+    </p>
+    <div class="meta">
+      <span>55 封信（男 31 / 女 24）</span>
+      <span>1846 年处女作</span>
+      <span>约 12 分钟读完</span>
+    </div>
+    <nav class="toc">
+      <h2>目录</h2>
+      <ol id="toc"></ol>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="doc">
+  <div id="loading">正在排版…</div>
+</main>
+
+<footer class="wrap">
+  <p>底本：人民文学出版社 2021 年版《穷人》，磊然 译，导言 赵桂莲。本页为个人阅读整理，用于学习与讨论，不替代原书。</p>
+  <p>
+    <a href="https://ankhwyf.github.io/poor/">← 一页速览版</a>　·　
+    <a href="https://github.com/ankhwyf/poor/blob/main/books/%E7%A9%B7%E4%BA%BA.md">原文全文（Markdown）</a>　·　
+    <a href="https://github.com/ankhwyf/poor">github.com/ankhwyf/poor</a>
+  </p>
+</footer>
+
+<button class="top" id="top" title="回到顶部">↑</button>
+
+<!-- ======================= 内容源（Markdown） ======================= -->
+<script type="text/markdown" id="md">
+## 一、先看一张图：这本书是怎么运转的
+
+整本书是一条很短的因果链，短到只有七步：
+
+```mermaid
+graph TD
+    S1["① 穷<br/>九级文官，抄了三十年公文"] --> S2["② 穷到不能当面说<br/>说出口就等于承认失败"]
+    S2 --> S3["③ 只能写<br/>55 封信"]
+    S3 --> S4["④ 在信里造体面<br/>小天使、小宝贝、凤仙花"]
+    S4 --> S5["⑤ 被需要<br/>＝ 我还活着，还有用"]
+    S5 --> S6["⑥ 贝科夫出现<br/>她被带走"]
+    S6 --> S7["⑦ 信断了<br/>存在的地基没了"]
+
+    classDef a fill:#f7efe8,stroke:#cfc3b1,stroke-width:1.5px,color:#211e1a
+    classDef b fill:#f7e7e2,stroke:#d8a99c,stroke-width:1.5px,color:#7a2e1f
+    class S1,S2,S3,S4 a
+    class S5,S6,S7 b
+```
+
+<p class="cap">注意第 ⑤ 步：不是「他爱她」，而是「他需要被她需要」。这是全书最锋利的一刀。</p>
+
+一句话版本：**贫穷剥夺的不是钱，是说话的地方；书信把那个地方还给了他们；她一走，地方就没了。**
+
+## 二、六个月，五十五封信
+
+```mermaid
+timeline
+    title 从四月到九月：钱越来越少，信越来越短
+    四月 : 窗帘暗号 : 凤仙花与天竺葵 : 客气的试探
+    五—六月 : 借钱与典当 : 裁背心、送书 : 邻居的孩子死了
+    七月 : 醉酒失态 : 她写信责备
+    八月 : 私信被当众朗读 : 她烫伤了手 : 回忆波克罗夫斯基
+    九月 : 一颗纽扣 · 一百卢布 : 贝科夫求婚 : 最后一封没有回音
+```
+
+六个月，没有一件事算得上「大事」：借钱、买茶、掉纽扣、孩子病死、有人求婚。
+但陀思妥耶夫斯基的本事就在于——**把「小事」写成一个人全部的尊严**。
+
+## 三、逐月拆解
+
+### <span class="num">01</span>四月：先建一个不用说话的暗号
+
+第一封信（四月八日）里，杰武什金兴奋地报告：**她的窗帘卷起来一角，挂在了凤仙花的花盆上**——那是他暗示过的信号。
+
+> 您放下窗帘——那就表示，再见，马卡尔·阿历克谢耶维奇，该睡觉了！您拉起窗帘——那就表示，早上好，马卡尔·阿历克谢耶维奇，您睡得好吗？
+
+他为了省钱给她租好房子，自己搬进厨房隔出来的小屋：一张床、一张桌、两把椅子、两盆凤仙花。他还特意解释：**这不是落魄，是「图方便」**。
+
+两个人的信通篇在道歉：打扰您了、不必挂念我、请原谅我写得太多。
+
+<div class="takeaway">
+四月的结论：穷人的第一件事不是省钱，是给自己造一个「值得被回应」的身份。窗帘不是窗帘，是「我在看你，你也在看我」的证据。
+</div>
+
+### <span class="num">02</span>五月—六月：穷的具体形状
+
+穷在这本书里从来不是形容词，是一串动作：借钱、典当、把靴子再穿一冬、给她买茶和糖、裁一件浅黄色带小花的背心、把书送来送去。
+
+六月一日，他写邻居戈尔什科夫家九岁的男孩死了。看完那间屋子，他写下的不是哭喊，而是一句极冷的话：
+
+> 现在肩上卸掉一个负担，他们也许会感到轻松些。
+
+六月二十二日，她把书退回来，说这书「毫无价值」「碰都碰不得」。两个人开始互相打量对方的趣味——**穷人也需要审美上的优越感，那是剩下不多的东西。**
+
+<div class="takeaway">
+五—六月的结论：贫穷不是「没有东西」，是每一件东西都要解释。连一杯茶、一双靴子、一本书，都得附上一段理由。
+</div>
+
+### <span class="num">03</span>七月：失态
+
+七月末，他喝醉了，在她那里出了丑。她写信责备，他回信辩解——辩解里露出全书的底色：
+
+> 我不是说我闹酒的事（去他的吧，小宝贝）……
+
+他需要「心欢快起来」。一个抄了三十年公文的人，一年里能让自己欢快的时刻，可能只有那么一两次，而那一次刚好被最在意的人看见。
+
+<div class="takeaway">
+七月的结论：穷人偶尔的快乐，会被当成道德问题来审判。别人喝酒是消遣，他喝酒是「堕落」。
+</div>
+
+### <span class="num">04</span>八月：当众被剥掉衣服
+
+八月五日，他写：「我完蛋了，我们俩都完蛋了。」原因是——他写给她的信的底稿从口袋里掉了出来，被邻居拉塔贾耶夫当众朗读，众人哄堂大笑；连仆人都开始顶撞他。
+
+八月十一日，她烫伤了左手，还是塞给他三十戈比。八月二十一日，她在信里第一次完整讲出初恋波克罗夫斯基的死。
+
+<div class="takeaway">
+八月的结论：摧毁一个人的不是穷，是「私人的东西被公开」。钱可以再借，脸一旦掉在地上，就捡不回来了。
+</div>
+
+### <span class="num">05</span>九月：一颗纽扣与一百卢布
+
+全书最著名的一场戏发生在九月五日。他被叫到将军面前，因为抄错了一份急件。他想解释，说不出话，然后——
+
+> 我的一粒纽扣——见它的鬼去！——本来只连在我身上的一根线上，这时忽然脱落了，又蹦又跳，当的一响一直朝前滚，该死的，一直滚到大人脚前。
+
+他弯腰去捡，捡不住，还笑了。将军问：「他是怎么啦？他是个什么人？」最后，将军塞给他一张一百卢布的票子，并握了握他的手。
+
+同一个月，地主贝科夫来了。**他正是当年毁掉她名誉的那个人**，如今提出结婚，理由是「有责任恢复我的名誉」，还留下五百卢布「偿还」杰武什金。她答应了，理由写得很清楚：
+
+> 如果有人能使我摆脱我的耻辱，恢复我清白的名声，使我将来不再受到贫困匮乏和不幸，除了他就没有别人了。
+
+<div class="takeaway">
+九月的结论：全书最温柔的一刀。她接受婚事，一半是为了活下去，一半是不想再成为他的负担。
+</div>
+
+### <span class="num">06</span>九月三十日：最后一封
+
+最后一封是杰武什金写的，语无伦次：
+
+> 他们正在把您带走，您要走了！现在他们就是把我的心从我的胸腔里剜出来，也比把您从我这里带走的好！
+
+书到这里结束。没有死亡，没有重逢，只有**没有下一封**。
+
+<div class="takeaway">
+结论：这本书的结局不是一个事件，是一个空位——收信人没有了。
+</div>
+
+## 四、人物：一句话记住
+
+<div class="tbl">
+
+| 人物 | 一句话 |
+|---|---|
+| 马卡尔·杰武什金 | 九级文官，抄了三十年公文；用指小词和幻想撑住一个体面人的人设。 |
+| 瓦尔瓦拉（瓦连卡） | 孤女，被毁过名誉；信写得比他短、比他克制，因为她更早知道结局。 |
+| 贝科夫 | 地主，当年毁掉她名誉的人，如今以「恢复名誉」为名娶她，真实动机是想要合法继承人。 |
+| 安娜·费奥多罗芙娜 | 远亲，收留过她，也把她推向过深渊；一个「好心」的加害者。 |
+| 波克罗夫斯基 | 大学生，她的初恋，死于肺病——她第一次知道什么叫失去。 |
+| 戈尔什科夫一家 | 更穷的邻居，孩子病死；杰武什金眼里的「明天的自己」。 |
+| 拉塔贾耶夫 | 穷文人，靠写廉价小说糊口；当众朗读他私信的人。 |
+| 将军 | 上司；因为一颗纽扣认识了他，给了他一百卢布和一次握手。 |
+| 费奥多拉 / 捷列扎 | 两个女仆，一个照料她，一个替他们送信——书信能成立，靠的是她们。 |
+
+</div>
+
+## 五、六个必须懂的关键词
+
+<div class="cards">
+
+<div class="card">
+<h4>小人物</h4>
+<p>俄国文学的一条支线：普希金的维林、果戈理的巴什马奇金。到杰武什金这里，小人物第一次<strong>自己开口说话</strong>，而不是被别人描写。</p>
+</div>
+
+<div class="card">
+<h4>指小词</h4>
+<p>「小天使」「小宝贝」「小心肝」。满篇的昵称不是甜，是<strong>一种自我缩小</strong>：把自己说小一点，才配得上被爱。</p>
+</div>
+
+<div class="card">
+<h4>窗帘暗号</h4>
+<p>卷起＝早安，放下＝晚安。两个穷人发明的一套<strong>零成本通信系统</strong>——不需要纸、不需要邮费，只需要一扇窗。</p>
+</div>
+
+<div class="card">
+<h4>书信体</h4>
+<p>没有旁白，没有上帝视角。读者只能知道他们愿意写下来的部分，<strong>也因此被迫站在他们的位置上</strong>。</p>
+</div>
+
+<div class="card">
+<h4>体面</h4>
+<p>全书的核心不是钱，是脸。一颗纽扣、一件旧大衣、一次被当众朗读的信，都能让一个人「彻底完蛋」。</p>
+</div>
+
+<div class="card">
+<h4>最高意义上的现实主义者</h4>
+<p>陀思妥耶夫斯基拒绝「心理学家」这个称号。他要写的是人心地下室里那个<strong>连自己都不愿承认的角落</strong>。</p>
+</div>
+
+</div>
+
+## 六、主题地图：钱、话、脸、人
+
+```mermaid
+mindmap
+  root((穷人))
+    钱
+      典当
+      借钱
+      一双靴子
+    话
+      指小词
+      书信
+      窗帘暗号
+    脸
+      一颗纽扣
+      当众朗读
+      体面
+    人
+      小人物
+      被需要
+      多余的人
+```
+
+<p class="cap">四条线索最后汇到同一件事：一个人凭什么算「人」。</p>
+
+## 七、几句可以直接记住的话
+
+> 人是一个奥秘。应该解开它，如果你毕生都在解开它，那你不要说损失了时间。
+> <cite>—— 陀思妥耶夫斯基，1839 年致兄长信（导言引）</cite>
+
+> 我亲爱的，我没能好好地看清楚您那可爱的小脸，我是感到多么遗憾哪！
+> <cite>—— 第一封信，四月八日</cite>
+
+> 现在我的心里堵得满满的，堵满了泪水……泪水憋得我不能透气，撕碎了我的心。再见吧。上帝啊！我是多么忧伤！记住我，记住您可怜的瓦连卡！
+> <cite>—— 瓦尔瓦拉，告别信</cite>
+
+> 他们正在把您带走，您要走了！现在他们就是把我的心从我的胸腔里剜出来，也比把您从我这里带走的好！
+> <cite>—— 杰武什金，最后一封</cite>
+
+## 八、读完，你应该能回答这六个问题
+
+<ul class="check">
+<li>为什么杰武什金宁愿自己住厨房隔断，也要给她租好一点的房子？</li>
+<li>「窗帘暗号」这种零成本的发明，为什么对穷人特别重要？</li>
+<li>一颗纽扣为什么比挨饿更让人崩溃？</li>
+<li>瓦连卡答应婚事，究竟是被迫，还是她自己算过的一笔账？</li>
+<li>如果全书没有一句旁白，读者失去的是什么，得到的又是什么？</li>
+<li>这本书写的到底是「穷」，还是「孤独」？两者是什么关系？</li>
+</ul>
+
+如果这六个问题你都能用自己的话答一遍，这本书就算读进去了。
+
+## 九、思想延伸：从「穷人」到「被计量的人」
+
+这本书写于 1846 年，但它问的问题今天还在：**社会用什么尺子量一个人？**
+
+杰武什金被量的尺子是「品级」和「制服」；瓦连卡被量的尺子是「名誉」。两个人都在用别人的尺子量自己，所以才会为一件旧大衣、一颗纽扣、一句闲话而崩溃。
+
+把尺子换到今天，形状变了，逻辑没变：
+
+- **绩效**：一个人被简化成几个数字，数字不好看，人就不值得被尊重。
+- **评分**：骑手、司机、客服被星级管理；一次差评，等于一次「当众朗读私信」。
+- **流量**：被看见才算存在，没被看见就等于没有发生。
+
+陀思妥耶夫斯基的提醒是反过来的：
+
+> **在人被计量之前，先承认他是个人。**
+
+这也是他自称「最高意义上的现实主义者」的意思——最真实的现实不是统计数字，是一个人深夜写下的那封没人回的信。
+
+<div class="note">
+这一节是我的阅读延伸，不是原书内容。原书只写到 1846 年的彼得堡，没有一句提到今天。
+</div>
+
+## 十、怎么读这本
+
+1. **先读最后两封，再回到四月。** 知道结局之后，前面每一句「不必挂念我」都会变味。
+2. **盯住三样东西：钱、称呼、天气。** 借了多少、还了多少；从「您」到「你」用了多久；春天到秋天的光怎么一点点暗下去。
+3. **别急着同情。** 他们不是可怜人，是两个拼命想保住尊严的人。同情是最容易、也最偷懒的读法。
+4. **接着读《双重人格》。** 同一类小官吏，一个还能倾诉，一个连倾诉的对象都没有。
+
+---
+
+想按原文顺序读，直接进 [全文](https://github.com/ankhwyf/poor/blob/main/books/%E7%A9%B7%E4%BA%BA.md)。十多万字，两三个晚上可以读完。
+</script>
+
+<!-- ======================= 渲染逻辑 ======================= -->
+<script src="assets/marked.min.js"></script>
+<script src="assets/mermaid.min.js"></script>
+<script>
+(function () {
+  var doc = document.getElementById('doc');
+  var md = document.getElementById('md').textContent;
+
+  // 1) Markdown → HTML
+  doc.innerHTML = marked.parse(md);
+
+  // 2) 自动生成目录（取 h2）
+  var toc = document.getElementById('toc');
+  doc.querySelectorAll('h2').forEach(function (h, i) {
+    if (!h.id) h.id = 'sec-' + (i + 1);
+    var li = document.createElement('li');
+    var a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent.trim().replace(/^[一二三四五六七八九十]+、\s*/, '');
+    li.appendChild(a);
+    toc.appendChild(li);
+  });
+
+  // 3) 代码块里的 mermaid → 图表容器
+  doc.querySelectorAll('pre > code.language-mermaid').forEach(function (code) {
+    var box = document.createElement('div');
+    box.className = 'diagram';
+    var chart = document.createElement('div');
+    chart.className = 'mermaid';
+    chart.textContent = code.textContent;
+    box.appendChild(chart);
+    code.parentElement.replaceWith(box);
+  });
+
+  // 4) 表格包一层，窄屏可横向滚动
+  doc.querySelectorAll('table').forEach(function (t) {
+    var w = document.createElement('div');
+    w.className = 'tbl';
+    t.parentNode.insertBefore(w, t);
+    w.appendChild(t);
+  });
+
+  // 5) 站外链接新窗口打开
+  doc.querySelectorAll('a[href^="http"]').forEach(function (a) {
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+
+  // 6) 渲染 Mermaid
+  mermaid.initialize({
+    startOnLoad: false,
+    securityLevel: 'loose',
+    theme: 'base',
+    fontFamily: '-apple-system, "PingFang SC", "Songti SC", sans-serif',
+    themeCSS: `
+      .section-root circle.node-bkg { fill: #8c3a2e !important; }
+      .section-root text, .section-root tspan { fill: #fffdf9 !important; }
+      .mindmap-node line { stroke: #e2d9ca !important; }
+    `,
+    themeVariables: {
+      primaryColor: '#fffefb',
+      primaryTextColor: '#211e1a',
+      primaryBorderColor: '#cfc3b1',
+      lineColor: '#b3a898',
+      edgeLabelBackground: '#fbf9f4',
+      secondaryColor: '#f5e9e4',
+      tertiaryColor: '#f7f2e9',
+      fontSize: '14px',
+      cScale0: '#8c3a2e', cScaleLabel0: '#fffdf9',
+      cScale1: '#c58e7d', cScaleLabel1: '#fffdf9',
+      cScale2: '#e6d8cb', cScaleLabel2: '#211e1a',
+      cScale3: '#f2eade', cScaleLabel3: '#211e1a',
+      cScale4: '#f7f2e8', cScaleLabel4: '#211e1a',
+      cScale5: '#f7f2e8', cScaleLabel5: '#211e1a',
+      cScale6: '#f7f2e8', cScaleLabel6: '#211e1a',
+      cScale7: '#f7f2e8', cScaleLabel7: '#211e1a',
+      cScale8: '#f7f2e8', cScaleLabel8: '#211e1a',
+      cScale9: '#f7f2e8', cScaleLabel9: '#211e1a',
+      cScale10: '#f7f2e8', cScaleLabel10: '#211e1a',
+      cScale11: '#f7f2e8', cScaleLabel11: '#211e1a',
+      xyChart: {
+        backgroundColor: '#fffefb',
+        titleColor: '#4a443c',
+        xAxisLabelColor: '#6b645c', xAxisLineColor: '#cfc3b1', xAxisTickColor: '#cfc3b1',
+        yAxisLabelColor: '#6b645c', yAxisLineColor: '#cfc3b1', yAxisTickColor: '#cfc3b1',
+        plotColorPalette: '#8c3a2e'
+      }
+    },
+    flowchart: { curve: 'linear', htmlLabels: true, padding: 14, nodeSpacing: 38, rankSpacing: 50 },
+    mindmap: { padding: 12 }
+  });
+  mermaid.run({ querySelector: '.mermaid' }).catch(function (e) { console.error(e); });
+
+  // 7) 回到顶部
+  var top = document.getElementById('top');
+  window.addEventListener('scroll', function () {
+    top.classList.toggle('on', window.scrollY > 600);
+  }, { passive: true });
+  top.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>
